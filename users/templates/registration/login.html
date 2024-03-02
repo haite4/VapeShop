@@ -1,0 +1,44 @@
+{% extends "auth_layout.html" %}
+{% load widget_tweaks %}
+
+
+{% block title %}
+    Login
+{% endblock %} 
+
+<h1>Hello world</h1>
+
+{% block content %}
+        <h1 class="text-warning">VapeShop</h1>            
+            <p class="text-light mb-4">Smoke a bet and exhale</p>
+            <div class="form-container">
+                <form method="POST">
+                    {% csrf_token %}
+                    <div class="form-floating mb-3 ">
+                        {% render_field form.username class="form-control" id="username" placeholder="Username" %}
+                        <label for="username">Username</label>
+                        
+                    </div>
+                    
+                    <div class="form-floating mb-3">
+                        {% render_field form.password  class="form-control" id="password" placeholder="password" %}
+                        <label for="password">Password</label>
+                    </div>     
+                        {% if form.errors %}
+                        <div class="text-danger my-3">
+                        {% for error in form.non_field_errors %}
+                            {{error}}
+                            {% endfor %}
+                        </div>
+                        {% endif %}
+                    <div class="d-grid">
+                        <button class="btn btn-success btn-lg mt-2" type="submit">Login</button>
+                     </div>
+                </form>
+
+                <div class="pt-4">
+                    <p class="text-white ">if you don't have an account <a href="{% url 'users:django_registration_register' %}" class="create-account">Create an Account</a></p>
+                </div>
+            </div>
+
+{% endblock %}

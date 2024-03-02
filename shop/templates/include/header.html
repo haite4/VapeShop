@@ -1,0 +1,140 @@
+{% load shop_tag %}
+
+<div class="outer-container bg-dark">
+
+    
+    <div class="container">
+        
+        <div class="top-header bg-dark d-flex justify-content-end">
+            <ul class="nav justify-content-center">
+                <li class="me-5">
+                  <a   href="https://www.portmone.com.ua/r3/pidtrymay-ukrayinsku-armiyu-epidtrymka">help to the army  🇺🇦</a>
+                </li>
+                <li class="me-5" >
+                  <a href="#">  
+                    ☎️   +380930562413</a>
+                </li>
+                <li class="me-5">
+                  <a href="#">🔞 only 18+</a>
+                </li>
+              </ul>
+        </div>
+        
+    
+    <nav class="navbar navbar-expand-lg navbar-dark bg-dark">
+        <a class="navbar-brand" href="{% url 'shop:home-page' %}">
+            <span class="logo display-6 ms-4">VapeShop</span>
+        </a>
+
+        <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
+            <span class="navbar-toggler-icon"></span>
+        </button>
+
+        <div class="collapse navbar-collapse" id="navbarNav">
+            <ul class="navbar-nav mx-auto mt-4">
+                <form class="d-flex custom-search-form" action="{% url 'shop:search-product' %}"   method="get" name="search" onsubmit="return validateForm()">
+                    <input class="form-control  me-2" type="text"  id="search-input" placeholder="Search" aria-label="Search" name="q" >
+                    <button class="btn btn-success" type="submit">Search</button>
+                </form>
+              
+                
+            </ul>
+
+            <div class="d-flex mx-auto mt-4">
+                {% if cart|length > 0 %}
+                        <span class="badge rounded-circle bg-danger position-absolute top-30 start-10 translate-middle">
+                             {{ cart|length }}
+                        </span>
+                {% else %}
+                <span class="badge rounded-circle bg-danger position-absolute top-30 start-10 translate-middle">0</span>
+                        {% endif %}
+                <a class="nav-basket mx-3"  href="{% url 'cart:cart-detail' %}">
+                    
+                    <svg width="30" height="30" viewBox="0 0 16 16" fill="none" xmlns="http://www.w3.org/2000/svg" id="basket-icon">
+                            
+                        <path d="M0 2.5C0 2.22386 0.223858 2 0.5 2H2C2.22943 2 2.42943 2.15615 2.48507 2.37873L2.89039 4H14.5C14.654 4 14.7993 4.07094 14.8941 4.19229C14.9889 4.31365 15.0224 4.4719 14.9851 4.62127L13.4851 10.6213C13.4294 10.8439 13.2294 11 13 11H4C3.77057 11 3.57057 10.8439 3.51493 10.6213L1.60961 3H0.5C0.223858 3 0 2.77614 0 2.5ZM3.14039 5L4.39039 10H12.6096L13.8596 5H3.14039ZM5 13C4.44772 13 4 13.4477 4 14C4 14.5523 4.44772 15 5 15C5.55228 15 6 14.5523 6 14C6 13.4477 5.55228 13 5 13ZM3 14C3 12.8954 3.89543 12 5 12C6.10457 12 7 12.8954 7 14C7 15.1046 6.10457 16 5 16C3.89543 16 3 15.1046 3 14ZM12 13C11.4477 13 11 13.4477 11 14C11 14.5523 11.4477 15 12 15C12.5523 15 13 14.5523 13 14C13 13.4477 12.5523 13 12 13ZM10 14C10 12.8954 10.8954 12 12 12C13.1046 12 14 12.8954 14 14C14 15.1046 13.1046 16 12 16C10.8954 16 10 15.1046 10 14Z" fill="white"/>
+                        
+                        </svg>
+                        
+                        
+                </a>
+                
+                <span class="badge rounded-circle bg-danger badge-like-nav position-absolute " style="left: 1100px; top: 40px;">
+                    <span id="wishlist-count"></span>
+                </span>
+                
+                <a class="nav-like me-4 mt-1 text-white mx-3" href="{% url  'shop:wishlist' %}" >
+                    <svg width="28" height="28" viewBox="0 0 16 16" fill="none" xmlns="http://www.w3.org/2000/svg" id="like-icon">
+                        <path d="M8 2.74805L7.28325 2.01133C5.5989 0.280067 2.51415 0.877695 1.40036 3.05284C0.876534 4.07583 0.75875 5.55246 1.71429 7.43758C2.63457 9.25313 4.54767 11.4265 8 13.7946C11.4523 11.4265 13.3654 9.25313 14.2857 7.43758C15.2413 5.55246 15.1235 4.07583 14.5996 3.05284C13.4859 0.877695 10.4011 0.280067 8.71675 2.01133L8 2.74805ZM8 15C-7.33313 4.86841 3.27876 -3.04087 7.82432 1.14308C7.88395 1.19797 7.94253 1.25493 8 1.314C8.05747 1.25494 8.11605 1.19797 8.17567 1.14309C12.7212 -3.04088 23.3331 4.8684 8 15Z" fill="white"/>
+                        </svg>
+                        
+                   
+                </a>
+                <div class="dropdown">
+                    <a class="account-nav">
+                        <svg width="40" height="38" viewBox="0 0 16 16" fill="none" xmlns="http://www.w3.org/2000/svg" id="account-nav">
+                            <path d="M8 8C9.65685 8 11 6.65685 11 5C11 3.34315 9.65685 2 8 2C6.34315 2 5 3.34315 5 5C5 6.65685 6.34315 8 8 8ZM10 5C10 6.10457 9.10457 7 8 7C6.89543 7 6 6.10457 6 5C6 3.89543 6.89543 3 8 3C9.10457 3 10 3.89543 10 5Z" fill="white"/>
+                            <path d="M14 13C14 14 13 14 13 14H3C3 14 2 14 2 13C2 12 3 9 8 9C13 9 14 12 14 13ZM13 12.9965C12.9986 12.7497 12.8462 12.0104 12.1679 11.3321C11.5156 10.6798 10.2891 10 7.99999 10C5.71088 10 4.48435 10.6798 3.8321 11.3321C3.15375 12.0104 3.00142 12.7497 3 12.9965H13Z" fill="white"/>
+                        </svg>
+                    </a>
+                    <div class="dropdown-content">
+                        {% if request.user.is_authenticated %}
+                        <a href="{% url 'account:account-main-page' %}">Profile</a>
+                        <form action="{% url 'users:logout' %}" method="post">
+                            {% csrf_token %}
+                            <button class="button-logout-link" type="submit">Logout</button>
+                        </form>
+                        {% else %}
+                        <a  href="{% url 'users:login' %}">Login</a>
+                        {% endif %}
+                        
+                       
+                    </div>
+                </div>
+                
+                </div>
+            </div>
+        </div>
+    </nav>
+    <div class="separator-top bg-light"></div>
+    <nav class="navbar-bottom navbar-expand-lg navbar-dark bg-dark">
+        <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNavBottom" aria-controls="navbarNavBottom" aria-expanded="false" aria-label="Toggle navigation">
+            <span class="navbar-toggler-icon"></span>
+        </button>
+        <div class="collapse navbar-collapse" id="navbarNavBottom">
+            <ul class="navbar-nav mx-auto">
+                <li class="nav-item dropdown">
+                    <a class="nav-link dropdown-toggle text-light mx-3" href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+                      Category
+                    </a>
+                    <ul class="dropdown-menu">
+                        {% get_categorys as categorys %}
+                        {% for category in categorys %}
+                      <li><a class="dropdown-item" href="{% url 'shop:filter-category' slug=category.slug %}">{{category.name}}</a></li>
+                        {% endfor %}
+                    </ul>
+          
+                <li class="nav-item mx-3">
+                    <a class="nav-link text-white" href="{% url 'shop:product-page' %}">Product</a>
+                </li>
+                <li class="nav-item mx-3">
+                    <a class="nav-link text-white" href="{% url  'shop:contacts'  %}">Contacts</a>
+                </li>
+                <li class="nav-item mx-3">
+                    <a class="nav-link text-white" href="{% url 'blog:show-blog' %}">Blog</a>
+                </li>
+                <li class="nav-item mx-3">
+                    <a class="nav-link text-white" href="{% url 'shop:ship_payment' %}">Shipping and payment</a>
+                </li> 
+            </ul>
+        </div>
+              
+     </nav>
+        <div class="bg-nav-bottom">
+            <div class="separator-bottom bg-light"></div>
+        </div>
+    </div>
+</div>  
+
+
+

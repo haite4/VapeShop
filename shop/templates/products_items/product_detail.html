@@ -1,0 +1,303 @@
+{% extends "base.html" %}
+{% load widget_tweaks %}
+
+
+
+
+{% block content %}
+<div class="product-grid">
+    <!-- Пример продукта -->
+    
+    <div class="product">
+      <img src="{{product.image.url}}" alt="Product Image">
+      <div class="product-info">
+        <div class="product-title ms-1">{{product.title}}</div>
+        <div class="product-price ms-1"> 
+          {% if product.discount %}
+          <span>{{product.final_price|floatformat:"2"}} €</span> 
+          {% else %}
+          <span>{{product.price}} €</span> 
+          {% endif %}
+        </div>
+        {% if average_rating %}
+        <p>Rating:  <strong>{{average_rating|floatformat:"1"}} </strong>out of 5</p>
+        {% endif %}
+        <div class="product-characteristics">
+          {% if product_attr %}
+          <table class="table table-borderless mt-3">
+            <tbody>
+              <tr>
+                <td>Manufacturar</td>
+                <td>{{product_attr.manufacturer}}</td>
+              </tr>
+              <tr>
+                <td>Material</td>
+                <td>{{product_attr.material}}</td>
+              </tr>
+              <tr>
+                <td>Flavor</td>
+                <td>{{product_attr.flavor}}</td>
+              </tr>
+              <tr>
+                <td>width</td>
+                <td>{{product_attr.width}}</td>
+              </tr>
+              <tr>
+                <td>height</td>
+                <td>{{product_attr.height}}</td>
+              </tr>
+              <tr>
+                <td>type</td>
+                <td>{{product_attr.type}}</td>
+              </tr>
+              <tr>
+                <td>brand</td>
+                <td>{{product_attr.Brand}}</td>
+              </tr>
+              <tr>
+                <td>number of puffs</td>
+                <td>{{product_attr.number_of_puffs}}</td>
+              </tr>
+              <tr>
+                <td>Battery</td>
+                <td>{{product_attr.battery_capacity}}</td>
+              </tr>
+              <tr>
+                <td>Fortress</td>
+                <td>{{product_attr.Fortress}}</td>
+              </tr>
+             
+            </tbody>
+          </table>
+
+        
+          {% endif %}
+        </div>
+      
+        <div class="d-flex justify-content-start align-items-center">
+          <svg width="16" class="mb-1" height="16" viewBox="0 0 16 16" fill="none" xmlns="http://www.w3.org/2000/svg">
+                <path d="M0 2.5C0 2.22386 0.223858 2 0.5 2H2C2.22943 2 2.42943 2.15615 2.48507 2.37873L2.89039 4H14.5C14.654 4 14.7993 4.07094 14.8941 4.19229C14.9889 4.31365 15.0224 4.4719 14.9851 4.62127L13.4851 10.6213C13.4294 10.8439 13.2294 11 13 11H4C3.77057 11 3.57057 10.8439 3.51493 10.6213L1.60961 3H0.5C0.223858 3 0 2.77614 0 2.5ZM3.14039 5L4.39039 10H12.6096L13.8596 5H3.14039ZM5 13C4.44772 13 4 13.4477 4 14C4 14.5523 4.44772 15 5 15C5.55228 15 6 14.5523 6 14C6 13.4477 5.55228 13 5 13ZM3 14C3 12.8954 3.89543 12 5 12C6.10457 12 7 12.8954 7 14C7 15.1046 6.10457 16 5 16C3.89543 16 3 15.1046 3 14ZM12 13C11.4477 13 11 13.4477 11 14C11 14.5523 11.4477 15 12 15C12.5523 15 13 14.5523 13 14C13 13.4477 12.5523 13 12 13ZM10 14C10 12.8954 10.8954 12 12 12C13.1046 12 14 12.8954 14 14C14 15.1046 13.1046 16 12 16C10.8954 16 10 15.1046 10 14Z" fill="white"/>
+                </svg>
+                {% if product.quantity >  0 %}
+                <form action="{% url 'cart:cart-add' product.slug %}" method="post">
+                  {{ cart_product_form }}
+                  {% csrf_token %}
+                
+                  <input class="btn btn-success" type="submit"  value="Add to cart">
+                  </form>
+                {% else %}
+                <button type="button" class="btn btn-warning btn-lg" data-bs-toggle="modal" data-bs-target="#staticBackdrop">
+                  <span><strong>notify me</strong></span>
+                </button>
+                
+                <!-- Modal -->
+               
+                <div class="modal fade" id="staticBackdrop" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1" aria-labelledby="staticBackdropLabel" aria-hidden="true">
+                  <div class="modal-dialog modal-dialog-centered">
+                    <div class="modal-content">
+                      <div class="modal-header">
+                        <h1 class="modal-title fs-5" id="staticBackdropLabel">notify me when the product is available
+
+                        </h1>
+                        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                      </div>
+                      <form  id="notifyForm" action="{% url 'shop:notify_me' product.slug  %}" method="post" >
+                      <div class="modal-body">
+                         {% csrf_token %}
+                         <p class="mb-2">Product name:  {{product.title}}</p>
+                        {% render_field  form.name class="form-control" id="name" placeholder="name"   %}
+                        {% render_field  form.email class="form-control mt-3" id="email" placeholder="Email"   %}
+                          <input type="hidden" name="product_id" value="{{product.id}}">
+                        </label>
+                      </div>
+                      <div class="modal-footer">
+                        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+                        <button type="submit" id="notifyBtn" class="btn btn-primary">Submit</button>
+                      </div>
+                    </form >
+                    </div>
+                  </div>
+                </div>
+             
+                
+                {% endif %}
+              <!-- {% for k, v in star_form.fields.star.choices %}
+                <input id="rating{{v}}" type="radio" name="star" value="{{v}}">
+                <label for="rating{{v}}">{{k}}</label>
+              {% endfor %} -->
+        </div>
+          
+      </div>
+    </div>
+
+    <div class="recommendation-block">
+      {% if recommender_products %}
+          <h4 class="text-center mb-5">buy together</h4>
+          <div class="recommendation-container">
+              {% for p in recommender_products %}
+                  <div class="recommendation-card">
+                    <a href="{% url 'shop:product-detail' product_slug=p.slug %}">
+                      <img src="{{p.image.url}}" alt="{{p.title}}" width="200px" height="200px">
+    
+                    </a>
+                    <a href="{% url 'shop:product-detail' p.slug %}" class="title-link">
+                                                    
+                      <h5 class="card-title">{{p.title}}</h5>
+                  </a>
+                      <!-- Дополнительная информация о товаре может быть добавлена здесь -->
+                  </div>
+              {% endfor %}
+          </div>
+      {% endif %}
+    </div>
+    
+    <!-- Добавьте другие продукты с аналогичной структурой -->
+  </div>
+  <div class="container extra-info mt-5">
+    <ul class="nav  d-flex justify-content-center mb-4" id="myTabs">
+      <li class="nav-item mx-3">
+        <a class="nav-links-description active" id="description-tab" data-bs-toggle="tab" href="#description">Описание</a>
+      </li>
+      {% with product_review=product.review.all %}
+      <li class="nav-item mx-3">
+        <a class="nav-links-description" id="reviews-tab" data-bs-toggle="tab" href="#reviews">Отзывы({{product_review|length}})</a>
+      </li>
+      {% endwith %}
+    </ul>
+    
+    <div class="tab-content mt-2">
+      <div class="tab-pane fade show active" id="description">
+        <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Deserunt inventore nihil porro dolore quos mollitia. Perspiciatis repellat dolore eum delectus eligendi ab tempore eveniet molestiae laboriosam nobis tempora corrupti sed amet at dicta, adipisci qui, rerum aperiam harum commodi iste magni? Beatae molestiae, omnis consequuntur veritatis commodi aliquam quaerat cum molestias numquam nemo officiis itaque magnam dignissimos ullam et similique ipsum temporibus porro. Aliquid veniam exercitationem placeat voluptas impedit a voluptate soluta nisi nihil natus iusto commodi ratione quod neque obcaecati facilis minus architecto quidem pariatur, quas at laborum. Nam doloribus at unde laudantium praesentium mollitia aliquam. Aut provident magnam fuga dolorem culpa, tempore dolores ab incidunt perferendis ipsam ipsum iure neque voluptatibus! Soluta laudantium beatae delectus dicta, reiciendis doloribus adipisci repellat unde. Reprehenderit nihil, vitae minus deserunt maxime molestiae est accusantium ea cumque illum earum aliquam eos, minima ab sit incidunt laudantium pariatur. Rem vitae debitis esse facilis quaerat?.</p>
+       </div> 
+      <div class="tab-pane fade" id="reviews">
+        <div class="container-reviews">
+          <div class="form-container">
+           
+            <form action="{% url 'shop:review-add' product.id %}" method="post">
+                {% csrf_token %} 
+                <div class="mb-3">
+                  <label for="email" class="review-label form-label">Email</label>
+                  <input type="email" class="review-input form-control" name="email" id="email" placeholder="email">
+                </div>
+                <div class="mb-3">
+                  <label for="name" class="review-label form-label">Name</label>
+                  <input type="text" class="review-input form-control" name="name" id="name" placeholder="Name">
+                </div>
+                <div class="mb-3">
+                  <label for="textarea" class="review-label form-label">Reviews</label>
+                  <textarea class="review-textarea form-control" id="textarea" name="text" rows="3"></textarea>
+                </div>
+                <div class="rating">
+                  <input type="radio" id="star5" name="rating" required="True" value="5">
+                  <label for="star5">&#9733;</label>
+                  <input type="radio" id="star4" name="rating" required="True" value="4">
+                  <label for="star4">&#9733;</label>
+                  <input type="radio" id="star3" name="rating" required="True" value="3">
+                  <label for="star3">&#9733;</label>
+                  <input type="radio" id="star2" name="rating" required="True" value="2">
+                  <label for="star2">&#9733;</label>
+                  <input type="radio" id="star1" name="rating" required="True" value="1">
+                  <label for="star1">&#9733;</label>
+                </div>
+                <span class="ms-4">Please select a rating</span>
+                <br>
+                <br>
+                {% if request.user.is_authenticated %}
+                <button type="submit" class="review-btn btn btn-success">Send review</button>
+                {% else %}
+                <span>To write a review you need to <a href="{% url 'users:login' %}"><strong>Log in</strong> </a></span>
+                {% endif %}
+              </form>
+           
+          </div>
+              <br>
+              <div class="reviews-container">
+
+                    {% if review|length == 0 %}
+                    <h3>There are no reviews for this product yet</h3>
+                    {% else %}
+                    {% for items  in  review %}
+                      <div class="review-item"> 
+                        <p class="text-dark">Name: <strong>{{items.name}}</strong></p>
+                        <span class="fa fa-star {% if items.rate > 4 %} checked {% endif %}" style="float: right;"></span>
+                        <span class="fa fa-star {% if items.rate > 3 %} checked {% endif %}" style="float: right;"></span>
+                        <span class="fa fa-star {% if items.rate > 2 %} checked {% endif %}" style="float: right;"></span>
+                        <span class="fa fa-star {% if items.rate > 1 %} checked {% endif %}" style="float: right;"></span>
+                        <span class="fa fa-star {% if items.rate > 0 %} checked {% endif %}" style="float: right;"></span>
+                        <p class="text-secondary"><span class="text-dark">Review:</span> {{items.text}}</p>
+                        
+                      </div>
+                  
+                    {% endfor %}
+                    {% endif %}
+                      
+                      
+            </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <script>
+    document.addEventListener('DOMContentLoaded', function() {
+      const notifyBtn = document.getElementById('notifyBtn');
+      const notifyForm = document.getElementById('notifyForm');
+      if(notifyBtn){
+        notifyBtn.addEventListener('click', function(event) {
+        event.preventDefault();
+  
+        const formData = new FormData(notifyForm);
+        const csrfToken = document.getElementsByName('csrfmiddlewaretoken')[0].value;
+  
+        fetch(notifyForm.getAttribute('action'), {
+            method: 'POST',
+            headers: {
+              'X-CSRFToken': csrfToken,
+             
+            },
+            body: formData,
+          })
+          .then(function(response){
+            if (!response.ok) {
+              throw new Error('Network response was not ok');
+            }
+            return response.json();
+          })
+          .then(function(response){
+           
+            if(response.message){
+              Toastify({
+                text: response.message,
+                duration: 3000, // Время отображения уведомления в миллисекундах
+                close: true, // Позволяет закрыть уведомление
+                gravity: "top", // Позиция отображения уведомления (top, bottom)
+                backgroundColor: "linear-gradient(to right, #00b09b, #96c93d)" 
+                 // Цвет фона уведомления
+            }).showToast();
+        
+             
+            }
+          else if(response.failed){
+            Toastify({
+              text: response.failed,
+              duration: 3000, // Время отображения уведомления в миллисекундах
+              close: true, // Позволяет закрыть уведомление
+              gravity: "top", // Позиция отображения уведомления (top, bottom)
+              backgroundColor: "linear-gradient(to right, #ff0000, #ff6347)" // Цвет фона уведомления
+          }).showToast();
+            }
+            
+            // Дополнительный код для обработки ответа, если нужно
+          })       
+          .catch(error => {
+            console.error('There has been a problem with your fetch operation:', error);
+          });
+      });
+    }
+    });
+ 
+  </script>
+
+{% endblock %}
+
+

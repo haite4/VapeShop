@@ -1,0 +1,74 @@
+
+
+
+  <form  method="get"  class="mb-5">
+      {% if brands %}
+      <h3 class="ms-2">Brand</h3> 
+      {% for brand in brands %}
+      <div class="form-check mt-3">
+        
+        
+        <input class="form-check-input" type="checkbox" name="brand" value="{{ brand.id }}" id="flexCheckDefault">
+        
+        <label class="form-check-label" for="flexCheckDefault">
+          {{brand.name}} ({{brand.total_products}})
+        </label>
+        
+      </div>  
+      {% endfor %}
+     {% endif %}
+        <div class="flavor mt-4">
+        
+        {% if flavors %}
+          <h3 class="ms-2">Flavors</h3> 
+          {% for flavor in flavors %}
+          <div class="form-check mt-3">
+              <input class="form-check-input"  type="checkbox"   name="flavor" value="{{flavor.id}}" id="flexCheckDefault">
+              <label class="form-check-label" for="flexCheckDefault">
+                {{flavor.name}} ({{flavor.total_products}})
+              </label>
+            </div>
+            
+          {% endfor %}
+      {% endif %}
+
+            {% if fortress %} 
+                <div class="fortress mt-4">
+                  <h3 class="ms-2">Strengt</h3> 
+                  {% for fortres in fortress %} 
+                  
+                  <div class="form-check mt-3">
+                      <input class="form-check-input"  type="checkbox"   name="fortress" value="{{fortres.id}}" id="flexCheckDefault">
+                      <label class="form-check-label" for="flexCheckDefault">
+                        {{fortres.name}} mg ({{fortres.total_products}})
+                      </label>
+                    </div>
+                    {% endfor %}
+                </div>
+            {% endif %}
+            
+            {% if brands or flavors %}
+            <button class="btn btn-info mt-4" type="submit">Find</button>
+            {% endif %}
+
+      
+        </div>
+  </form> 
+
+
+
+<div class="price-slider">
+                           
+    <h4 class="mb-3">Price</h4>
+    <input type="range" id="price-range"  min="{{minmaxprice.price_min}}" max="{{minmaxprice.price_max}}" step="0.01" value="{{minmaxprice.price_max}}">
+    <div >
+    <span >From: <span id="min-price">{{minmaxprice.price_min|floatformat:"2"}}</span><span> €</span> </span> <span>To:  <span id="max-price">{{minmaxprice.price_max|floatformat:"2"}}</span><span> €</span></span>
+    </div>
+    <input type="hidden" id="brand"  value="{{brand}}">
+    <input type="hidden" id="flavor" value="{{flavor}}">
+    <input type="hidden" id="fortress" value="{{fortres}}">
+          
+</div>
+  <input type="number" class="form-range-number" id="max_price" min="{{minmaxprice.price_min}}" max="{{minmaxprice.price_max}}" value="{{minmaxprice.price_max|floatformat:'2'}}">
+  <button type="submit" class="btn btn-info mt-3 btn-range" id="price-filter-btn">Filter</button>
+  <input type="hidden" id="category-slug" value="{{category_slug}}"> 

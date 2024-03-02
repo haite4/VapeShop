@@ -1,0 +1,880 @@
+body{
+  
+    font-family: 'Montserrat', sans-serif;
+    margin: 0;
+    padding: 0;
+   
+  
+}
+
+.logo{
+    background: rgb(198,153,66);
+    background: linear-gradient(90deg, rgba(198,153,66,1) 20%, rgba(185,93,46,1) 32%, rgba(196,145,19,1) 38%, rgba(145,111,33,1) 53%, rgba(186,129,26,1) 62%, rgba(210,80,74,1) 79%, rgba(230,158,55,1) 85%);
+    -webkit-background-clip: text;
+    background-clip: text;
+    color: transparent;
+    font-family: 'Roboto', sans-serif;
+    font-weight: bold;
+   
+}
+
+
+
+.navbar{
+    height: 120px;
+}
+
+
+
+
+
+
+
+.nav-link {
+    position: relative; /* Добавляем позиционирование, чтобы управлять позицией линии */
+    text-decoration: none; /* Убираем стандартное подчеркивание текста */
+}
+
+.nav-link::before {
+    content: ""; /* Создаем псевдоэлемент для линии подчеркивания */
+    position: absolute; /* Позиционируем псевдоэлемент абсолютно относительно родительского элемента */
+    bottom: 0; /* Размещаем линию внизу ссылки */
+    left: 0; /* Выравниваем линию по левому краю */
+    width: 100%; /* Растягиваем линию на всю ширину ссылки */
+    height: 1px; /* Задаем толщину линии */
+    background-color: transparent; /* Начальное состояние - прозрачная линия */
+    transition: background-color 0.3s ease; /* Плавный переход цвета фона за 0.3 секунды */
+}
+
+.nav-link:hover::before {
+    background-color: #F4A460; /* Цвет линии при наведении */
+}
+
+
+
+.container-fluid{
+    margin-top: 100px;
+    margin-left: 50px;
+}
+ 
+
+
+.sidebar{
+    width: 250px;
+    height: 250px;
+    
+
+}
+
+.category-link{
+    text-decoration: none;
+    display: block;
+    margin-top: 10px;
+    color:black;
+    font-size: 18px;
+    line-height: 30px;
+    cursor: default;
+    
+   
+    
+}
+
+.category-link span:hover{
+  color:red;
+  cursor: pointer;
+
+
+    
+}
+
+
+
+
+
+
+
+
+ 
+
+.card-title{
+    white-space: nowrap;        /* Запрет переноса строк */
+    overflow: hidden;           /* Скрытие переполненного контента */
+    text-overflow: ellipsis;
+    color:black;
+    text-decoration: none;
+    
+      /* Отображение троеточия для обрезанного текста */
+}
+
+
+
+.card-title:hover{
+    color:red;
+}
+
+
+.title-link{
+    text-decoration: none;
+}
+
+
+
+
+
+
+
+.product-grid {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: start;
+    padding: 20px;
+  }
+
+  .product {
+    display: flex;
+    width: 100%; /* Ширина всей сетки, можете изменить по вашему усмотрению */
+    background-color: #fff;
+    border: 1px solid #ddd;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+    margin: 10px;
+    overflow: hidden;
+  }
+
+  .product img {
+    width: 35%;
+    height: auto;
+    object-fit: cover;
+     /* Чтобы изображение сохраняло пропорции */
+  }
+
+  .product-info {
+    padding: 20px;
+    width: 50%;
+    margin-left: 50px;
+    
+  }
+
+  .product-title {
+    font-size: 18px;
+    margin-bottom: 10px;
+    font-weight: bold;
+  }
+
+  .product-characteristics {
+    font-size: 16px;
+    margin-bottom: 10px;
+  }
+
+  .product-price {
+    font-size: 23px;
+    color: #e44d26;
+    font-weight: bold;
+  }
+
+
+
+ .nav-links-description{
+    text-decoration: none;
+    color:#87858B;
+    font-size: 23px;
+    
+
+}
+
+
+
+
+.nav-links-description:hover{
+    color:black;
+}
+
+
+.nav-links-description.active {
+    color: black !important;
+    font-weight: bold;
+}
+
+
+#basket-icon:hover path{
+    fill:#D8624A;
+}
+
+#like-icon:hover path{
+    fill:#D8624A;
+}
+
+
+
+
+#item-like:hover path{
+    fill:#D8624A
+}
+
+
+
+
+.card {
+    max-width: 250px; /* Максимальная ширина карточки */
+}
+
+
+.blog-title{
+    color:black;
+    font-weight: bold;
+}
+
+
+
+.blog-title:hover{
+    color:red;
+}
+
+
+.continue-reading{
+    color:#87858B;
+    text-decoration: none;
+}
+
+
+.continue-reading:hover{
+    color:red;
+}
+
+
+
+nav {
+    display: flex;
+    justify-content: center;
+    margin-top: 20px;
+}
+
+.pagination {
+    display: flex;
+    list-style: none;
+    padding: 0;
+    margin: 0;
+}
+
+.page-item {
+    margin: 0;
+}
+
+/* Стили для стрелок влево и вправо */
+.page-link {
+    text-decoration: none;
+    display: inline-block;
+    padding: 10px;
+    margin: 5px;
+    border: 1px solid #ddd;
+    border-radius: 5px;
+}
+
+.page-link:hover {
+    background-color: #f2f2f2;
+}
+
+
+.blog-block {
+    margin-right: 230px;
+}
+
+.enlarged-image {
+    width: 300px; /* Желаемая ширина в пикселях или других единицах измерения */
+    height: auto;
+    cursor: pointer; /* Изменение стиля курсора при наведении */
+    transition: transform 0.3s ease; /* Добавление плавного эффекта при /* Автоматически высчитывает высоту, сохраняя пропорции */
+}
+.enlarged-image:hover {
+    transform: scale(0.95); /* Увеличение изображения при наведении */
+}
+
+
+.card {
+    border: none; /* Убираем границу вокруг карточки */
+    position: relative;
+}
+
+.card-body-blog {
+    width: 300px; /* Устанавливаем ширину card-body равной ширине изображения */
+    padding-left: 0; /* Убираем отступ слева */
+}
+
+/* Опционально: добавьте отступы для визуального разделения элементов */
+.card-text {
+    margin-top: 10px;
+}
+
+
+
+.centered-text {
+    text-align: center; /* Центрирование текста по горизонтали */
+    max-width: 600px;   /* Максимальная ширина контейнера, чтобы текст не растягивался на всю ширину */
+    margin: 0 auto; 
+    
+        /* Автоматическое выравнивание контейнера по центру по горизонтали */
+}
+
+
+
+.container-reviews {
+    display: flex;
+    justify-content: space-between;
+    align-items: flex-start;
+    height: 100vh;
+    background-color: #f4f4f4;
+}
+
+.form-container {
+    width: 40%;
+    padding: 20px;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+    background-color: #fff;
+    box-sizing: border-box;
+}
+
+.reviews-container {
+    width: 60%;
+    padding: 20px;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+    background-color: #fff;
+    box-sizing: border-box;
+    display: flex;
+    flex-direction: column;
+   
+}
+
+.review-label {
+    display: block;
+    margin-bottom: 8px;
+}
+
+.review-input,
+.review-textarea {
+    width: 100%;
+    padding: 8px;
+    margin-bottom: 12px;
+    box-sizing: border-box;
+}
+
+.review-btn {
+    background-color: #4caf50;
+    color: #fff;
+    padding: 10px;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+}
+
+.review-btn:hover {
+    background-color: #45a049;
+}
+
+.review-item {
+    /* Добавьте стили по вашему усмотрению для каждого отзыва */
+    margin-bottom: 20px;
+}
+
+
+#price-range {
+    width: 70%; /* 100% ширина слайдера */
+    height: 20px; /* Увеличьте высоту слайдера по вашему желанию */
+    margin-bottom: 10px;
+     /* Добавьте отступ снизу, чтобы создать пространство между слайдером и другими элементами */
+}
+
+
+
+.form-range-number{
+    width: 70%;
+    height: 50px; /* Adjust the height as needed */
+    padding: 5px;
+    border: 1px solid #ced4da;
+    border-radius: 5px;
+    margin-bottom: 10px;
+}
+
+
+
+.btn-range{
+    display: block;
+    width: 70%;
+   
+}
+
+
+
+
+ .rating {
+    overflow: hidden;
+    vertical-align: bottom;
+    display: inline-block;
+    width: 155px;
+    height: 30px;
+  }
+  
+  .rating > input {
+    opacity: 0;
+    margin-right: -100%;
+  }
+  
+  .rating > label {
+    position: relative;
+    display: block;
+    float: right;
+    background: url('../images/star-off-big.png');
+    background-size: 30px 30px;
+  }
+  
+  .rating > label:before {
+    display: block;
+    opacity: 0;
+    content: '';
+    width: 30px;
+    height: 30px;
+    background: url('../images/star-on-big.png');
+    background-size: 30px 30px;
+    transition: opacity 0.2s linear;
+  }
+  
+  .rating > label:hover:before,  .rating > label:hover ~ label:before,  .rating:not(:hover) > :checked ~ label:before { opacity: 1; }
+
+
+
+
+
+  .custom-search-form {
+    width: 600px; /* Задайте желаемую ширину */
+}
+
+.custom-search-input {
+    width: 100%; /* Занимает 100% ширины родительского элемента */
+}
+
+
+.top-header {
+    width: 100%;
+    padding: 10px 0; /* Вы можете настроить отступы сверху и снизу по вашему усмотрению */
+    background-color: #333; /* Цвет фона верхнего колонтитула */
+    color: #fff; /* Цвет текста верхнего колонтитула */
+    /* Другие стили, которые вам нужны */
+}
+
+
+.top-header a{
+    text-decoration: none;
+    color:#fff;
+}
+
+
+
+.top-header a:hover{
+    color:#D8624A;
+    
+}
+
+
+
+.navbar-bottom{
+    height: 50px;
+}
+
+
+
+.separator-top {
+    height: 1px; /* Высота линии разделителя */
+    background-color: #fff; /* Цвет разделителя */
+    margin: 10px 0; /* Внешние отступы разделителя */
+}
+
+
+
+.separator-bottom {
+    height: 1px; /* Высота линии разделителя */
+    background-color: #fff; /* Цвет разделителя */
+    margin: 10px 0; /* Внешние отступы разделителя */
+}
+
+
+.bg-nav-bottom{
+    background-color: black;
+    height: 8px;
+}
+
+
+.fixed-top {
+    position: fixed;
+    top: 0;
+    width: 100%;
+    z-index: 1000;
+    margin: 0;
+    padding: 0;;
+     /* или любое другое значение z-index */
+  }
+
+  .discount-placeholder {
+    height: 30px; /* Высота метки скидки */
+    width: 100%; /* Ширина блока для запаса места */
+}
+
+
+
+.discount-label {
+    top: 10px; /* регулируйте значение в соответствии с вашим макетом */
+    right: 10px; /* регулируйте значение в соответствии с вашим макетом */
+    background-color: #ff0000; /* цвет фона */
+    color: #ffffff; /* цвет текста */
+    padding: 5px; /* отступы внутри блока */
+    border-radius: 5px; /* закругление углов */
+    font-weight: bold;
+    font-size: 18px;
+    display: inline-block;
+}
+
+
+
+.form-container-checkout{
+    width: 40%;
+    padding: 20px;
+    border: 1px solid #FAF3DE;
+    border-radius: 15px;
+    box-sizing: border-box;
+    margin-top: 0px;
+    background-color: #fff;
+   
+}
+
+
+
+
+
+.checkout-container {
+    display: flex;
+    justify-content: space-between; /* Aligns children to each end of the container */
+   
+}
+
+.form-container-checkout {
+    flex: 1; /* Takes up available space */
+    margin-right: 20px; /* Adjust the margin as needed */
+    height: 100%;
+    max-width: 40%; /* Установите ваш желаемый максимальный размер */
+}
+
+.cart-container {
+    flex: 1; /* Takes up available space */
+}
+
+
+.checkout-total-price{
+    background-color: #fff;
+}
+
+.btn-checkout{
+    max-width: 200px;
+    margin: 0;
+
+}
+
+
+.checkout-header {
+    position: relative;
+    bottom: 50px;
+    display: flex;    
+
+}
+
+.order-info{
+    margin-left: 55%;
+}
+
+
+.favorites-container {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    padding: 20px;
+    background-color: #f9f9f9;
+    border-radius: 10px;
+    margin-top: 20px;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+}
+
+.favorites-item {
+    width: 200px;
+    background-color: #fff;
+    border-radius: 5px;
+    margin: 10px;
+    box-shadow: 0 0 5px rgba(0, 0, 0, 0.1);
+}
+
+.favorites-item img {
+    width: 100%;
+    border-top-left-radius: 5px;
+    border-top-right-radius: 5px;
+}
+
+.favorites-item .details {
+    padding: 10px;
+}
+
+.favorites-item .price {
+    color: #666;
+}
+
+
+.badge-like-nav{
+    position: absolute; 
+    top: 45px; 
+    right: 190px; 
+
+}
+
+.badge.rounded-circle.bg-danger.position-absolute {
+    width: 24px; /* Задайте фиксированную ширину */
+    height: 24px; /* Задайте фиксированную высоту */
+    border-radius: 12px; /* Половина ширины/высоты, чтобы сделать круг */
+}
+
+
+
+#account-nav:hover path{
+    fill:#D8624A;
+}
+
+
+
+
+.button-logout-link {
+    background: none;
+    border: none;
+    padding: 0;
+    font: inherit;
+    cursor: pointer;
+    text-decoration: underline; /* Добавляем подчеркивание, чтобы выглядело как ссылка */
+    color: inherit; /* Используем цвет текста по умолчанию */
+    right: 65px;
+}
+
+
+
+.accordion{
+    width: 70%;
+   
+}
+
+
+.input-wrapper {
+    display: flex;
+    flex-direction: column;
+}
+
+.input-wrapper label {
+    margin-bottom: 5px; /* Расстояние между меткой и полем ввода */
+}
+
+.input-wrapper input {
+    width: 200px; /* Ширина поля ввода */
+}
+
+
+.recommendation-block {
+    margin-top: 20px;
+}
+
+.recommendation-container {
+    display: flex;
+   
+}
+
+.recommendation-card {
+    border: 1px solid #ccc;
+    border-radius: 5px;
+    padding: 10px;
+    margin-bottom: 10px;
+    margin:5px;
+}
+
+
+
+
+
+.home-page-header {
+    font-family: 'Franklin Gothic Medium', 'Arial Narrow', Arial, sans-serif;
+    display: flex;
+    justify-content: center;
+}   
+
+
+.container-home-page-slider {
+    display: flex;
+}
+
+.half-screen-block {
+    flex: 1;
+    height: 25vh; 
+    display: flex;
+    flex-direction: row;
+    justify-content: flex-start; 
+    align-items: center;
+    background-color: #94D587;
+    width: 55%; 
+ } 
+
+.half-screen-block h2 {
+    margin-bottom: 20px;
+    color: #fff;
+    font-weight: bold;
+    margin-right: auto;
+    margin-left: 20px;
+}
+
+.svg-container {
+    width: 100px; 
+    margin-left: auto;
+    height: 100px; 
+    margin-right: 50px;
+    /* Выравнивание по правому краю */
+ } 
+
+
+
+
+ .half-screen-block:nth-child(2) {
+    margin-left: auto;
+    background-color:#92c1e9; /* Пример цвета фона */
+    width: 45%; /* Ширина второго блока */
+}
+
+
+.home-page-link{
+    text-decoration: none;
+}
+
+
+
+.footer {
+    background-color: #333;
+    color: #fff;
+    padding: 40px 0;
+    margin-top: 200px;
+  
+  
+
+}
+
+
+
+.footer-content {
+    display: flex;
+    justify-content: space-between;
+
+}
+
+.footer-column {
+    flex: 1;
+}
+
+.footer-column h3 {
+    font-size: 18px;
+    margin-bottom: 10px;
+}
+
+.footer-column ul {
+    list-style: none;
+    padding: 0;
+}
+
+.footer-column ul li {
+    margin-bottom: 5px;
+}
+
+.footer-column ul li a {
+    color: #fff;
+    text-decoration: none;
+}
+
+.footer-column ul li a:hover {
+    text-decoration: underline;
+}
+
+
+.checked {
+    color: gold; /* или любой другой цвет, который вы хотите использовать для отмеченных звезд */
+}
+
+
+
+
+.ship-payment-svg{
+    display: block; 
+  margin: 0 auto; 
+}
+
+
+.about-site{
+    margin-bottom: 70px;
+}
+
+
+.dropdown-content {
+    display: none;
+    position: absolute;
+    background-color: #f9f9f9;
+    min-width: 60px;
+    box-shadow: 0px 8px 16px 0px rgba(0,0,0,0.2);
+    z-index: 1;
+}
+
+/* Показать выпадающее меню при наведении на иконку аккаунта */
+.dropdown:hover .dropdown-content {
+    display: block;
+}
+
+
+
+
+.dropdown-content a {
+    color: #333; /* Цвет текста */
+    text-decoration: none; /* Убираем подчеркивание */
+    display: block; /* Делаем ссылки блочными элементами, чтобы они занимали всю ширину контейнера */
+    padding: 8px 12px; /* Внутренние отступы для ссылок */
+    transition: background-color 0.3s; /* Плавное изменение цвета фона при наведении */
+}
+
+/* Стили для кнопок */
+.dropdown-content button {
+    background-color: #f44336; /* Цвет фона кнопки */
+    color: #fff; /* Цвет текста */
+    border: none; /* Убираем границу кнопки */
+    padding: 8px 12px; /* Внутренние отступы для кнопки */
+    cursor: pointer; /* Изменяем курсор при наведении на кнопку */
+    transition: background-color 0.3s; /* Плавное изменение цвета фона при наведении */
+}
+
+/* Стили для ссылок при наведении */
+.dropdown-content a:hover, .dropdown-content button:hover {
+    background-color: grey; /* Изменяем цвет фона при наведении */
+}
+
+
+
+
+#search-input-blog{
+    width: 250px;
+}
+
+
+.blog-news-links{
+    color:black;
+    font-size: 18px;
+    text-decoration: none;
+}
+
+
+.blog-news-links:hover{
+    color: #d8624a;
+    transition: transform 0.3s ease;
+    
+}

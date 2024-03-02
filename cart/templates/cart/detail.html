@@ -1,0 +1,99 @@
+{% extends "base.html" %}
+
+
+
+
+{% block content %}
+<div class="container mt-5">
+   
+    <div class="d-flex justify-content-between mb-3">
+        <a class="btn btn-outline-dark mb-4" href="{% url 'shop:home-page' %}">&#8592;  continue shopping</a>
+        <h4>Shopping Cart</h4>
+        {% if cart|length > 0 %}
+            <h4 class="me-5">Cart items ( {{cart|length}} )</h4>
+        {% else %}
+            <h4 class="me-5">Cart is empty</h4>
+        {% endif %}
+    </div>
+    <table class="table">
+      <thead>
+        <tr>
+            <th scope="col">Image</th>
+          <th scope="col">Name</th>
+          <th scope="col">Quantity</th>
+          <th scope="col">Price</th>
+          <th scope="col">Total</th>
+        </tr>
+      </thead>
+      <tbody>
+        {% for item in cart %}
+          <tr>
+            <td><img src="{{item.product.image.url}}" alt="Product image"  class="img-thumbnail" width="200px" height="200px"></td>
+            <td class="align-middle">{{ item.product.title }}</td>
+                
+            <td  class="align-middle">
+                <p class="mb-3">x {{ item.quantity }}</p>
+                <form action="{% url 'cart:cart-add' item.product.slug  %}" method="post" class="mb-5">
+                    {% csrf_token %}
+                    {{item.update_quantity_form.quantity}}
+                    {{item.update_quantity_form.update}}
+                    <input class="btn btn-primary btn-sm" type="submit" value="Update">
+                </form>
+                
+            </td>
+            {%  if item.product.discount %}
+            <td class="align-middle" >{{item.product.final_price|floatformat:"2" }} €</td>
+            {% else %}
+            <td class="align-middle" >{{item.product.price|floatformat:"2" }} €</td>
+            {% endif %}
+            <td class="align-middle">{{item.total_price|floatformat:"2"}} €</td>
+            <td class="align-middle"><a href="{% url 'cart:cart-remove' item.product.slug %}" class="btn btn-danger btn-sm">
+                <i class="bi bi-trash"></i> Remove
+            </a></td>
+        {% endfor %}
+      
+
+    </tr>
+    
+      </tbody>
+      
+    </table>
+    <div class="d-flex justify-content-between align-items-center mt-4">
+          {% if cart|length > 0   %}
+            <h4 class="ms-auto me-5">Total Price: {{ cart.get_total_price|floatformat:"2" }} €</h4>
+           
+                
+            <a href="{% url 'order:checkout' %}" class="btn btn-success btn-lg mb-2 me-5">Checkout</a>
+            {% else %}
+            
+            <h4  class="text-danger"><strong>Add products to continue shopping</strong></h4>
+
+           
+            {% endif %}
+    </div>
+    <br>
+</div>
+
+<div class="recommendation-block">
+  {% if recommender_products %}
+      <h4 class="text-center mb-5">buy together</h4>
+      <div class="recommendation-container">
+          {% for p in recommender_products %}
+              <div class="recommendation-card">
+                <a href="{% url 'shop:product-detail' product_slug=p.slug %}">
+                  <img src="{{p.image.url}}" alt="{{p.title}}" width="200px" height="200px">
+
+                </a>
+                <a href="{% url 'shop:product-detail' p.slug %}" class="title-link">
+                                                
+                  <h5 class="card-title">{{p.title}}</h5>
+              </a>
+                  <!-- Дополнительная информация о товаре может быть добавлена здесь -->
+              </div>
+          {% endfor %}
+      </div>
+  {% endif %}
+</div>
+
+
+{% endblock %}

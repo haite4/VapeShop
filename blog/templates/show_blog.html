@@ -1,0 +1,58 @@
+{% extends "base.html" %}
+{% load filters %}
+
+{% block blog %}
+
+  <div class="container">
+    <div class="row">
+      {% include 'include/sidebar_blog.html' %}
+      <div class="col-md-9">
+       
+        <div class="blog-block row row-cols-1 row-cols-sm-2 row-cols-md-2 row-cols-lg-3 mx-5">
+          {% for items in pages %}
+          <div class="col mb-4">
+            <div class="card">
+              <div style="position: relative; display: inline-block;">
+                <a href="{% url 'blog:show-detail' items.slug %}">
+                  <img src="{{ items.image.url }}" class="enlarged-image" alt="Изображение продукта">
+                </a>
+              </div>
+              <div class="card-body-blog mt-4">
+                <a href="{% url 'blog:show-detail' items.slug %}" class="title-link">
+                  <h5 class="blog-title">{{ items.title }}</h5>
+                </a>
+                <p class="card-text">
+                  {{ items.body|replace_dash|slice:":250"|striptags }}{% if items.body|length > 250 %}<br><a class="continue-reading" href="{% url 'blog:show-detail' items.slug %}">Читать далее &#8594;</a>{% endif %}
+                </p>
+              </div>
+            </div>
+          </div>
+          {% endfor %}
+        </div>
+    
+        <nav aria-label="Навигация по страницам">
+          <ul class="pagination">
+            <li class="page-item">
+              {% if pages.has_previous %}
+              <a class="page-link" href="?page={{ pages.previous_page_number }}" aria-label="Предыдущая">
+                <span aria-hidden="true">&laquo;</span>
+              </a>
+              {% endif %}
+            </li>
+            {% for p in paginator.page_range %}
+            <li class="page-item"><a class="page-link" href="?page={{ p }}">{{ p }}</a></li>
+            {% endfor %}
+            <li class="page-item">
+              {% if pages.has_next %}
+              <a class="page-link" href="?page={{ pages.next_page_number }}" aria-label="Следующая">
+                <span aria-hidden="true">&raquo;</span>
+              </a>
+              {% endif %}
+            </li>
+          </ul>
+        </nav>
+      </div>
+    </div>
+  </div>
+  
+{% endblock blog %}

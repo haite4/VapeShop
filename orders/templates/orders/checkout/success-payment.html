@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Successful Payment</title>
+    <style>
+        body {
+            font-family: 'Arial', sans-serif;
+            background-color: #f0f0f0;
+            text-align: center;
+            padding: 50px;
+        }
+
+        .success-message {
+            background-color: #4CAF50;
+            color: #fff;
+            padding: 20px;
+            border-radius: 10px;
+            margin-bottom: 20px;
+        }
+
+        .order-details {
+            background-color: #fff;
+            border: 1px solid #ddd;
+            padding: 20px;
+            border-radius: 10px;
+        }
+    </style>
+</head>
+<body>
+    <div class="success-message">
+        <h1>Payment Successful!</h1>
+        <p>Thank you for your purchase.</p>
+    </div>
+
+    <div class="order-details">
+        <h2>Order Details</h2>
+        <p>Order Number:  <strong>{{order}}</strong></p>
+        <p>Amount Paid:   <strong>{{orderitem.amount_total}} €</strong></p>
+        <p>Full Name: <strong>{{customer.name}}</strong></p>
+        <p>An email has been sent to  <strong>{{customer.email}}</strong>  for delivery details.</p>
+        <p><a class="link-opacity-100" href="{% url 'shop:home-page' %}">Back to shop</a></p>
+        
+    </div>
+
+
+
+    <p>For any questions, contact vapeshopsupport@gmail.com.</p>
+</body>
+</html>

@@ -1,0 +1,21 @@
+{% extends "base.html"  %}
+
+
+
+{% block blog %}
+{% include 'include/sidebar_blog.html' %}
+    <div class="container mt-5 d-flex justify-content-center align-items-start centered-text">
+        <div class="text-center">
+            <div class="title-blog">
+                <img src="{{blog_detail.image.url}}">
+                <h1 class="blog-title-detail mt-3">{{blog_detail.title}}</h1>
+                <p>Author {{blog_detail.author}}. Published {{blog_detail.created_at}}</p>
+
+            </div>
+            {{ blog_detail.body|safe }}
+            
+        </div>
+    
+
+    </div>
+{% endblock blog %}

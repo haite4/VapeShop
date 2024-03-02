@@ -1,0 +1,68 @@
+{% extends "auth_layout.html" %}
+{% load widget_tweaks %}
+
+
+{% block title %} Create account {% endblock %}
+
+
+{% block content %}
+
+<h1 class="text-warning mb-3">VapeShop</h1>
+    <p class="text-white mb-4">Smoke a bet and exhale</p>
+    <div class="form-container">
+        <form method="POST">
+            {% csrf_token %}
+            
+            <div class="form-floating mt-4">
+                {% render_field  form.email class="form-control" id="Email" placeholder="Email"  %}
+                    <label for="Email">Email</label>
+                {% if form.email.errors %}
+                    {% for error in form.email.errors %}
+                        {{ error }}
+                    {% endfor %}
+                {% endif %}
+            </div>
+            <div class="form-floating mt-4">
+                {% render_field  form.username  class="form-control" id="username" placeholder="Username" %}
+                <label for="username">Username</label>
+                {% if form.username.errors %}
+                    {% for error in form.username.errors %}
+                        <div class="errorlist text-start mt-3">
+                             {{error}}
+                        </div>
+                    {% endfor %}
+                {% endif %} 
+
+            </div>
+            <div class="form-floating mt-4">
+                {% render_field form.password1 class="form-control" id="password1" placeholder="password" %}
+                <label for="password1">Password</label>
+            </div>
+            <div class="form-floating mt-4">
+                {% render_field form.password2 class="form-control" id="password2" placeholder="Repeat Password" %}
+                <label for="password2">Repeat Password</label>
+                {% if form.password2.errors %}
+                        {% for error in  form.password2.errors %}
+                        <div class="errorlist text-start mt-3">
+                            {{error}}
+                        </div>
+                        {% endfor %}
+                {% endif %}
+                {% if form.password1.errors  %}
+                    {% for error in form.password1.errors %}
+                    <div class="errorlist text-start mt-3">
+                        {{error}}
+                    </div>
+                    {% endfor %}
+                 {% endif %}
+            </div>
+                <div class="d-grid mt-4">
+                    <button class="btn btn-success btn-lg">Create account</button>
+                </div>
+        </form>
+        <div class="d-flex pt-4">
+            <p class="text-white">If you already have an existing account, <a href="{% url 'users:login' %}" class="login-account">login</a></p>
+        </div>
+
+    </div>
+{% endblock %}

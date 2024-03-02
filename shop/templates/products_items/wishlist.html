@@ -1,0 +1,35 @@
+{% extends 'base.html' %}
+{% block content %}
+
+<div class="main-favorite-container">
+        {% if wishlist %}
+        <div class="mb-5">
+                <h1 class="text-center">Your Wishlist</h1>
+        </div>
+        <div class="favorites-container">
+                
+                
+                {% for item in wishlist %}
+                <div class="favorites-item">
+                <img src="{{item.product.image.url}}" alt="{{ item.product.title }}">
+                <div class="details">
+                        <p class="card-title"> {{ item.product.title }}</p>
+                        <p class="price">{{ item.product.price }} €</p>
+                        <div class="d-flex">
+                        <button class="btn btn-danger btn-sm wishlist-remove-button"  data-product-id="{{ item.product.id }}">Remove</button>
+                                <form action="{% url 'cart:cart-add' item.product.slug  %}" method="post">
+                                        {{cart_add_product_form}}
+                                        {% csrf_token %}
+                                        <button class="btn btn-success btn-sm ms-2"   type="submit">Add to cart</button>
+                                </form>
+                        </div>
+                </div>
+                </div>
+                {% endfor %}
+                {% else %}
+                <h1 class="text-center">Your wishlist empty</h1>
+                {% endif %}
+                <!-- Добавьте другие товары здесь -->
+        </div>
+</div>
+{% endblock %}
