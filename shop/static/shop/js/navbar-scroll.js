@@ -10,5 +10,5 @@ function handleScroll() {
 
 window.addEventListener("scroll", handleScroll);
 
-// Вызовем handleScroll() сразу после загрузки страницы
+
 handleScroll();
