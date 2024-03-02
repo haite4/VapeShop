@@ -43,10 +43,10 @@ function addWishlist(product_id){
 }  else if (response.failed) {
     Toastify({
         text: response.failed,
-        duration: 3000, // Время отображения уведомления в миллисекундах
-        close: true, // Позволяет закрыть уведомление
-        gravity: "top", // Позиция отображения уведомления (top, bottom)
-        backgroundColor: "linear-gradient(to right, #ff0000, #ff6347)" // Цвет фона уведомления
+        duration: 3000, 
+        close: true, 
+        gravity: "top", 
+        backgroundColor: "linear-gradient(to right, #ff0000, #ff6347)" 
     }).showToast();
 
    
@@ -79,19 +79,19 @@ function removewishlistitem(remove_product_id){
             updateWishlistContent()
             Toastify({
                 text: response.status,
-                duration: 3000, // Время отображения уведомления в миллисекундах
-                close: true, // Позволяет закрыть уведомление
-                gravity: "top", // Позиция отображения уведомления (top, bottom)
-                backgroundColor: "linear-gradient(to right, #00b09b, #96c93d)" // Цвет фона уведомления
+                duration: 3000, 
+                close: true, 
+                gravity: "top", 
+                backgroundColor: "linear-gradient(to right, #00b09b, #96c93d)" 
 
             }).showToast();
         }else if (response.error) {
             Toastify({
                 text: response.error,
-                duration: 3000, // Время отображения уведомления в миллисекундах
-                close: true, // Позволяет закрыть уведомление
-                gravity: "top", // Позиция отображения уведомления (top, bottom)
-                backgroundColor: "linear-gradient(to right, #ff0000, #ff6347)" // Цвет фона уведомления
+                duration: 3000, 
+                close: true, 
+                gravity: "top", 
+                backgroundColor: "linear-gradient(to right, #ff0000, #ff6347)" 
             }).showToast();
 
         }})}
@@ -100,14 +100,14 @@ function removewishlistitem(remove_product_id){
             fetch("/shop/wishlist/")
                 .then(response => response.text())
                 .then(html => {
-                    // Создаем временный элемент div для парсинга HTML-кода
+                
                     var tempDiv = document.createElement('div');
                     tempDiv.innerHTML = html;
         
-                    // Используем querySelector для поиска нужного блока HTML-кода
+                  
                     var wishlistContent = tempDiv.querySelector(".main-favorite-container").innerHTML;
         
-                    // Теперь у вас есть только HTML-код блока с классом "favorites-container"
+                   
                     const container = document.querySelector(".main-favorite-container");
                     container.innerHTML = wishlistContent;
                     attachEventListeners();
@@ -140,13 +140,13 @@ function updateWishlistCount() {
                   }
                 
           
-            // Находим элемент с id 'wishlist-count' и обновляем его содержимое
+    
         })
         
         .catch(error => console.error('Ошибка при получении данных:', error));
 }
 
-// Вызываем функцию обновления количества при загрузке страницы
+
 updateWishlistCount();
 
 
